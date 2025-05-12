@@ -39,12 +39,34 @@
     .hexagon {
       clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
     }
+    h1 {
+      font-size: 1.5em;
+    }
+    h2 {
+      font-size: 1em;
+      margin: 10px 0 20px;
+      color: #888;
+    }
+    button {
+      margin-top: 30px;
+      padding: 10px 20px;
+      font-family: monospace;
+      font-size: 1em;
+      background: #222;
+      color: white;
+      border: 1px solid #444;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #333;
+    }
   </style>
 </head>
 <body>
-  <!--puzzle solution: Monolith0426-->
-  <h1>Transmitting Signal</h1>
+  <!--sol: MONOLITH0426-->
+  <h2>Transmitting signal...</h2>
   <div class="shape" id="shape"></div>
+  <button onclick="start()">Replay Transmission</button> 
   <script>
     const shapes = {
       0: ['circle', 'triangle', 'diamond'],
@@ -68,17 +90,15 @@
         const bit = binary[i];
         const shapeType = randomShapeForBit(bit);
 
-       
         container.className = 'shape';
         if (shapeType === 'triangle') container.innerHTML = '';
 
-    
         container.classList.add(shapeType);
 
-        await new Promise(res => setTimeout(res, 500)); 
+        await new Promise(res => setTimeout(res, 1000)); 
 
         container.className = 'shape';
-        await new Promise(res => setTimeout(res, 200)); 
+        await new Promise(res => setTimeout(res, 500));  
       }
     };
 
@@ -88,6 +108,5 @@
     };
 
     start();
-  </script>
-</body>
+  </script></body>
 </html>
