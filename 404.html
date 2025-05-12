@@ -1,0 +1,92 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Transmitter</title>
+  <style>
+    body {
+      background-color: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      flex-direction: column;
+      color: white;
+      font-family: monospace;
+    }
+    .sequence {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      max-width: 90vw;
+      justify-content: center;
+      margin-top: 40px;
+    }
+    .shape {
+      width: 40px;
+      height: 40px;
+      background-color: white;
+      animation: flash 0.5s ease-in-out;
+    }
+    .circle { border-radius: 50%; }
+    .triangle {
+      width: 0;
+      height: 0;
+      border-left: 20px solid transparent;
+      border-right: 20px solid transparent;
+      border-bottom: 40px solid white;
+      background: none;
+    }
+    .square {}
+    .diamond {
+      transform: rotate(45deg);
+    }
+    .half-circle {
+      border-radius: 50% 50% 0 0;
+    }
+    .hexagon {
+      clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+    }
+    @keyframes flash {
+      0% { opacity: 0; }
+      50% { opacity: 1; }
+      100% { opacity: 0.8; }
+    }
+  </style>
+</head>
+<body>
+<!--puzzle solution: Monolith0426--> 
+  <h1>transmitting signal...</h1>
+  <div class="sequence" id="sequence"></div>  
+<script>
+    const shapes = {
+      0: ['circle', 'triangle', 'diamond'],
+      1: ['square', 'hexagon', 'half-circle']
+    };
+
+    const binaries = [
+      "010010000110010100100000011000100110010101100011011000010110110101100101001000000110111101101110011001010010000001110111011010010111010001101000001000000111010001101000011001010010000001001101011011110110111001101111011011000110100101110100011010000010110000100000011101000110100001100101001000000110010101101110011001000010000001101111011001100010000001101000011010010111001100100000011100110111000001100101011000110111010001110010011101010110110100110010",
+      "0101010001101000011001010010000001001101011011110110111001101111011011000110100101110100011010000010011101110011001000000110011001101100011001010110010101110100011010010110111001100111001000000110100101101101011000010110011101100101001011000010000001110100011010000110010100100000011101010110111001100001011101100110111101101001011001000110000101100010011011000110010100100000011000110110111101101110011101000111001001101111011011000010110000100000011101000110100001100101001000000110010101101110011001000010000001101111011001100010000001101000011010010111001100100000011100110111000001100101011000110111010001110010011101010110110100110010"
+    ];
+
+    const randomShapeForBit = bit => {
+      const options = shapes[bit];
+      return options[Math.floor(Math.random() * options.length)];
+    };
+
+    const renderSequence = () => {
+      const binary = binaries[Math.floor(Math.random() * binaries.length)];
+      const container = document.getElementById('sequence');
+
+      binary.split('').forEach(bit => {
+        const shapeType = randomShapeForBit(bit);
+        const div = document.createElement('div');
+        div.className = `shape ${shapeType}`;
+        container.appendChild(div);
+      });
+    };
+
+    renderSequence();
+  </script>
+</body>
+</html>
